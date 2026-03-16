@@ -165,17 +165,20 @@ const getEpisodeServers = async (req, res) => {
         const response = await axiosInstance.get(`/anime/${animeSlug}`);
         const doc = response.data.anime;
 
+        // Collect all episodes (consolidating from scattered backend records if needed)
+        const allEps = await collectAllEpisodes(animeSlug, doc);
+
         // Find matching episode
         let targetEp = null;
         if (epParam) {
             // Try matching by streamId first, then by episodeNumber
-            targetEp = doc.episodes.find(ep => {
+            targetEp = allEps.find(ep => {
                 const subId = ep.link?.sub?.[0] ? extractStreamId(ep.link.sub[0]) : null;
                 const dubId = ep.link?.dub?.[0] ? extractStreamId(ep.link.dub[0]) : null;
                 return subId === epParam || dubId === epParam || ep.episodeNumber?.toString() === epParam;
             });
         } else {
-            targetEp = doc.episodes[0];
+            targetEp = allEps[0];
         }
 
         if (!targetEp) {
@@ -214,17 +217,20 @@ const getEpisodeSources = async (req, res) => {
         const response = await axiosInstance.get(`/anime/${animeSlug}`);
         const doc = response.data.anime;
 
+        // Collect all episodes
+        const allEps = await collectAllEpisodes(animeSlug, doc);
+
         // Find episode
         let targetEp = null;
         if (epParam) {
             // Try matching by streamId first, then by episodeNumber
-            targetEp = doc.episodes.find(ep => {
+            targetEp = allEps.find(ep => {
                 const subId = ep.link?.sub?.[0] ? extractStreamId(ep.link.sub[0]) : null;
                 const dubId = ep.link?.dub?.[0] ? extractStreamId(ep.link.dub[0]) : null;
                 return subId === epParam || dubId === epParam || ep.episodeNumber?.toString() === epParam;
             });
         } else {
-            targetEp = doc.episodes[0];
+            targetEp = allEps[0];
         }
 
         if (!targetEp) {

@@ -373,7 +373,7 @@ const data = await resp.json();
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/anime/steinsgate-9ve6br/episodes");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/anime/summer-time-rendering-5hwlkp/episodes");
 const data = await resp.json();
 ```
 
@@ -383,12 +383,12 @@ const data = await resp.json();
 {
   "success": true,
   "data": {
-    "totalEpisodes": 24,
+    "totalEpisodes": 25,
     "episodes": [
       {
         "number": 1,
-        "title": "Turning Point",
-        "episodeId": "steinsgate-9ve6br?ep=89776",
+        "title": "Episode 1",
+        "episodeId": "summer-time-rendering-5hwlkp?ep=89776",
         "isFiller": false
       }
     ]
@@ -435,7 +435,7 @@ const data = await resp.json();
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/servers?animeEpisodeId=steinsgate-0-wog7p8?ep=89776");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/servers?animeEpisodeId=summer-time-rendering-5hwlkp?ep=89776");
 const data = await resp.json();
 ```
 
@@ -445,8 +445,8 @@ const data = await resp.json();
 {
   "success": true,
   "data": {
-    "episodeId": "steinsgate-0-wog7p8?ep=89776",
-    "episodeNo": 5,
+    "episodeId": "summer-time-rendering-5hwlkp?ep=89776",
+    "episodeNo": 1,
     "sub": [
       {
         "serverId": 1,
@@ -482,7 +482,7 @@ const data = await resp.json();
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/sources?animeEpisodeId=steinsgate-9ve6br?ep=89776&server=s-2&category=sub");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/sources?animeEpisodeId=summer-time-rendering-5hwlkp?ep=89776&server=s-2&category=sub");
 const data = await resp.json();
 ```
 

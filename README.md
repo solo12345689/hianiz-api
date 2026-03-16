@@ -58,6 +58,7 @@
 - [Host your instance](#host-your-instance)
     - [Vercel](#vercel)
     - [Render](#render)
+- [Backend Provider](#backend-provider)
 - [Documentation](#documentation)
     - [GET Anime Home Page](#get-anime-home-page)
     - [GET Anime A-Z List](#get-anime-a-z-list)
@@ -128,6 +129,15 @@ docker run -d --name hianiz-api -p 4000:4000 hianiz-api
 ### Render
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/solo12345689/hianiz-api)
+
+## <span id="backend-provider">📡 Backend Provider</span>
+
+This API utilizes a high-performance backend to scrape and serve anime data.
+
+- **Base URL**: `https://api.hianime.bar/api`
+- **Target Site**: `https://hianimez.to`
+
+---
 
 ## <span id="documentation">📚 Documentation</span>
 

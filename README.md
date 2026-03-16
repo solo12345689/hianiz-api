@@ -363,7 +363,7 @@ const data = await resp.json();
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/anime/steinsgate-3/episodes");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/anime/steinsgate-9ve6br/episodes");
 const data = await resp.json();
 ```
 
@@ -378,7 +378,7 @@ const data = await resp.json();
       {
         "number": 1,
         "title": "Turning Point",
-        "episodeId": "steinsgate-3?ep=89776",
+        "episodeId": "steinsgate-9ve6br?ep=89776",
         "isFiller": false
       }
     ]
@@ -425,7 +425,7 @@ const data = await resp.json();
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/servers?animeEpisodeId=steinsgate-0-92?ep=89776");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/servers?animeEpisodeId=steinsgate-0-wog7p8?ep=89776");
 const data = await resp.json();
 ```
 
@@ -435,7 +435,7 @@ const data = await resp.json();
 {
   "success": true,
   "data": {
-    "episodeId": "steinsgate-0-92?ep=89776",
+    "episodeId": "steinsgate-0-wog7p8?ep=89776",
     "episodeNo": 5,
     "sub": [
       {
@@ -472,7 +472,7 @@ const data = await resp.json();
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/sources?animeEpisodeId=steinsgate-3?ep=89776&server=s-2&category=sub");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/sources?animeEpisodeId=steinsgate-9ve6br?ep=89776&server=s-2&category=sub");
 const data = await resp.json();
 ```
 

@@ -632,6 +632,55 @@ const getNextEpisodeSchedule = async (req, res) => {
     }
 };
 
+// ------------------------------------------------------------------
+// GET /api/v2/hianime/anime/:animeId/episode/servers
+// Returns servers for ALL available episodes of an anime in one call.
+// ------------------------------------------------------------------
+const getAllEpisodeServers = async (req, res) => {
+    try {
+        const { animeId } = req.params;
+        if (!animeId) {
+            return res.status(400).json({ success: false, message: 'animeId is required' });
+        }
+
+        const response = await axiosInstance.get(`/anime/${animeId}`);
+        const doc = response.data.anime;
+
+        // Collect all episodes
+        const allEps = await collectAllEpisodes(animeId, doc);
+
+        if (!allEps || allEps.length === 0) {
+            return res.status(404).json({ success: false, message: 'No episodes found for this anime' });
+        }
+
+        // Build server info for every episode
+        const episodesWithServers = allEps.map(ep => {
+            const servers = parseEpisodeServers(ep);
+            return {
+                episodeId: `${animeId}?ep=${ep.episodeNumber}`,
+                episodeNo: ep.episodeNumber,
+                title: ep.title || `Episode ${ep.episodeNumber}`,
+                isFiller: ep.isFiller || false,
+                sub: servers.sub,
+                dub: servers.dub,
+                raw: [],
+            };
+        });
+
+        res.status(200).json({
+            success: true,
+            data: {
+                animeId,
+                totalEpisodes: episodesWithServers.length,
+                episodes: episodesWithServers,
+            },
+        });
+    } catch (error) {
+        console.error('[getAllEpisodeServers]', error.message);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
 module.exports = {
     getHomePage,
     getAnimeInfo,
@@ -639,6 +688,7 @@ module.exports = {
     getQtipInfo,
     getAnimeEpisodes,
     getEpisodeServers,
+    getAllEpisodeServers,
     getEpisodeSources,
     getSearch,
     getSearchSuggestions,

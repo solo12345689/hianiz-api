@@ -422,20 +422,20 @@ const data = await resp.json();
 
 <summary>
 
-### `GET` Anime Episode Servers
+### `GET` All Episode Servers for an Anime
 
 </summary>
 
 #### Endpoint
 
 ```sh
-/api/v2/hianime/episode/servers?animeEpisodeId={id}
+/api/v2/hianime/anime/{animeId}/episode/servers
 ```
 
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/servers?animeEpisodeId=summer-time-rendering-5hwlkp?ep=1");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/anime/summer-time-rendering-5hwlkp/episode/servers");
 const data = await resp.json();
 ```
 
@@ -445,13 +445,31 @@ const data = await resp.json();
 {
   "success": true,
   "data": {
-    "episodeId": "summer-time-rendering-5hwlkp?ep=1",
-    "episodeNo": 1,
-    "sub": [
+    "animeId": "summer-time-rendering-5hwlkp",
+    "totalEpisodes": 1,
+    "episodes": [
       {
-        "serverId": 1,
-        "serverName": "s-2",
-        "streamId": "89776"
+        "episodeId": "summer-time-rendering-5hwlkp?ep=1",
+        "episodeNo": 1,
+        "title": "Episode 1",
+        "isFiller": false,
+        "sub": [
+          {
+            "serverId": 1,
+            "serverName": "s-2",
+            "streamId": "89776",
+            "url": "https://megaplay.buzz/stream/s-2/89776/sub"
+          }
+        ],
+        "dub": [
+          {
+            "serverId": 1,
+            "serverName": "s-2",
+            "streamId": "89776",
+            "url": "https://megaplay.buzz/stream/s-2/89776/dub"
+          }
+        ],
+        "raw": []
       }
     ]
   }
@@ -459,11 +477,12 @@ const data = await resp.json();
 ```
 
 > [!TIP]
-> The `streamId` (e.g., `89776`) is the exact **Hianime Episode ID** required by the [MegaPlay Video API](https://megaplay.buzz/api) to play or embed the video player.
+> This endpoint returns **all available episodes** and their server links in a **single request**. Each episode includes a `streamId` (e.g., `89776`) which is the exact **Hianime Episode ID** required by the [MegaPlay Video API](https://megaplay.buzz/api).
 
 [🔼 Back to Top](#table-of-contents)
 
 </details>
+
 
 <details>
 

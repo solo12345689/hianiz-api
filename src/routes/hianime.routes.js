@@ -5,6 +5,7 @@ const {
     getAnimeInfo,
     getAnimeEpisodes,
     getEpisodeServers,
+    getAllEpisodeServers,
     getEpisodeSources,
     getSearch,
     getSearchSuggestions,
@@ -37,6 +38,10 @@ router.get('/anime/:animeId/next-episode-schedule', getNextEpisodeSchedule);
 // ── Episode Servers ───────────────────────────────────────────────
 // ?animeEpisodeId=summer-time-rendering-5hwlkp?ep=1
 router.get('/episode/servers', getEpisodeServers);
+
+// ── All Episode Servers (all episodes at once) ────────────────────
+// GET /anime/:animeId/episode/servers
+router.get('/anime/:animeId/episode/servers', getAllEpisodeServers);
 
 // ── Episode Sources (Stream Links) ────────────────────────────────
 // ?animeEpisodeId=...&server=s-2&category=sub

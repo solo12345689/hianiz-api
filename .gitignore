@@ -1,0 +1,12 @@
+node_modules/
+.env
+*.log
+probe_*.json
+qtip_probe.json
+search_*.json
+*_output.txt
+*.txt
+all_backend_titles.json
+home_check.json
+root.html
+summer_time_found.json

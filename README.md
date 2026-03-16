@@ -1,15 +1,4 @@
-<p align="center">
-    <a href="https://github.com/solo12345689/hianiz-api">
-        <img 
-            src="https://raw.githubusercontent.com/ghoshRitesh12/aniwatch-api/refs/heads/main/public/img/hianime_v2.png" 
-            alt="hianiz_logo" 
-            width="175" 
-            height="175"
-            decoding="async"
-            fetchpriority="high"
-        />
-    </a>
-</p>
+
 
 # <p align="center">Hianiz API</p>
 

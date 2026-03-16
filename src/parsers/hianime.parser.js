@@ -86,10 +86,8 @@ const parseEpisodeList = (episodes, animeSlug) => {
                 ? extractStreamId(ep.link.dub[0])
                 : null;
 
-        // Use the actual stream ID (if available) for MegaPlay compatibility, 
-        // fall back to episode number.
-        const epId = streamId || dubStreamId || ep.episodeNumber;
-        const episodeId = `${animeSlug}?ep=${epId}`;
+        // Use the episode number for the ID to make it predictable (e.g. ?ep=1)
+        const episodeId = `${animeSlug}?ep=${ep.episodeNumber}`;
 
         return {
             number: ep.episodeNumber,

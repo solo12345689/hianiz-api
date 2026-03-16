@@ -388,7 +388,7 @@ const data = await resp.json();
       {
         "number": 1,
         "title": "Episode 1",
-        "episodeId": "summer-time-rendering-5hwlkp?ep=89776",
+        "episodeId": "summer-time-rendering-5hwlkp?ep=1",
         "isFiller": false
       }
     ]
@@ -435,7 +435,7 @@ const data = await resp.json();
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/servers?animeEpisodeId=summer-time-rendering-5hwlkp?ep=89776");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/servers?animeEpisodeId=summer-time-rendering-5hwlkp?ep=1");
 const data = await resp.json();
 ```
 
@@ -445,7 +445,7 @@ const data = await resp.json();
 {
   "success": true,
   "data": {
-    "episodeId": "summer-time-rendering-5hwlkp?ep=89776",
+    "episodeId": "summer-time-rendering-5hwlkp?ep=1",
     "episodeNo": 1,
     "sub": [
       {
@@ -482,7 +482,7 @@ const data = await resp.json();
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/sources?animeEpisodeId=summer-time-rendering-5hwlkp?ep=89776&server=s-2&category=sub");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/episode/sources?animeEpisodeId=summer-time-rendering-5hwlkp?ep=1&server=s-2&category=sub");
 const data = await resp.json();
 ```
 

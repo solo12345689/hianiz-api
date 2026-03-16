@@ -15,8 +15,17 @@ async function collectAllEpisodes(animeId, mainDoc) {
         episodes.push(...mainDoc.episodes);
     }
 
-    // 2. If we only have 1 episode but the show has many, try searching the backend
-    if (episodes.length === 1 && parseInt(mainDoc.totalEpisodes) > 1) {
+    // 2. Search for fragments if the episode count is suspicious
+    const reportedTotal = Math.max(
+        parseInt(mainDoc.totalEpisodes) || 0,
+        parseInt(mainDoc.totalSub) || 0,
+        parseInt(mainDoc.totalSubbed) || 0,
+        parseInt(mainDoc.totalDub) || 0,
+        parseInt(mainDoc.totalDubbed) || 0
+    );
+
+    // If we have very few episodes but it's not a movie, or if the reported total is higher
+    if (episodes.length < reportedTotal || (episodes.length < 10 && mainDoc.Type !== 'Movie')) {
         try {
             // Search in both latest/anime and animelist with broad limits
             const [latestRes, listRes] = await Promise.all([

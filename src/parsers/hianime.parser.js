@@ -27,16 +27,15 @@ const extractPublicId = (slug) => {
  * Map a raw anime record from api.hianime.bar to the Aniwatch API shape.
  */
 const parseAnimeCard = (anime) => {
-    // Use the 11th slug as the default ID (that's what hianimes.se uses: slugs[11])
-    const animeId = (anime.slugs && anime.slugs[11]) || (anime.slugs && anime.slugs[0]) || anime._id || '';
+    const animeId = (anime.slugs && anime.slugs[0]) || anime._id || '';
     return {
         id: animeId,
         name: anime.title || anime.English || '',
         jname: anime.Japanese || '',
         poster: anime.image || '',
+        duration: anime.Duration || '',
         type: anime.Type || 'Unknown',
         rating: anime.Rating || '',
-        duration: anime.Duration || '',
         episodes: {
             sub: parseInt(anime.totalSubbed) || parseInt(anime.totalEpisodes) || 0,
             dub: parseInt(anime.totalDubbed) || 0,
@@ -49,7 +48,7 @@ const parseAnimeCard = (anime) => {
  */
 const parseAnimeInfo = (animeDoc) => {
     return {
-        id: (animeDoc.slugs && animeDoc.slugs[11]) || (animeDoc.slugs && animeDoc.slugs[0]) || animeDoc._id || '',
+        id: (animeDoc.slugs && animeDoc.slugs[0]) || animeDoc._id || '',
         name: animeDoc.title || animeDoc.English || '',
         jname: animeDoc.Japanese || '',
         poster: animeDoc.image || '',
@@ -75,24 +74,28 @@ const parseAnimeInfo = (animeDoc) => {
  * Parse episode list from /api/anime/{slug}
  * Each episode has link.sub[], link.dub[], slugs[], episodeNumber
  */
-const parseEpisodeList = (episodes) => {
+const parseEpisodeList = (episodes, animeSlug) => {
     if (!episodes || !Array.isArray(episodes)) return [];
 
     return episodes.map((ep) => {
-        // Build the episodeId in the format aniwatch uses: "anime-name-episode-1-publicid"
         const epSlug = ep.slugs && ep.slugs[0] ? ep.slugs[0] : null;
-        const streamId = ep.link && ep.link.sub && ep.link.sub[0]
-            ? extractStreamId(ep.link.sub[0])
-            : null;
+        const publicId = extractPublicId(epSlug);
+        const streamId = (ep.link && ep.link.sub && ep.link.sub[0]) 
+            ? extractStreamId(ep.link.sub[0]) 
+            : (ep.link && ep.link.dub && ep.link.dub[0])
+                ? extractStreamId(ep.link.dub[0])
+                : null;
+
+        // Use the actual stream ID (if available) for MegaPlay compatibility, 
+        // fall back to episode number.
+        const epId = streamId || dubStreamId || ep.episodeNumber;
+        const episodeId = `${animeSlug}?ep=${epId}`;
 
         return {
             number: ep.episodeNumber,
             title: ep.title || `Episode ${ep.episodeNumber}`,
-            episodeId: epSlug, // used as the animeEpisodeId query param
-            streamId: streamId, // megaplay numeric ID
+            episodeId: episodeId,
             isFiller: ep.isFiller || false,
-            hasSubtitle: ep.link && ep.link.sub && ep.link.sub.length > 0,
-            hasDub: ep.link && ep.link.dub && ep.link.dub.length > 0,
         };
     });
 };

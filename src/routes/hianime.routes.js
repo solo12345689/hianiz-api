@@ -7,8 +7,15 @@ const {
     getEpisodeServers,
     getEpisodeSources,
     getSearch,
+    getSearchSuggestions,
     getCategory,
     getGenreAnimes,
+    getProducerAnimes,
+    getSchedule,
+    getAZList,
+    getQtipInfo,
+    getAboutInfo,
+    getNextEpisodeSchedule
 } = require('../controllers/hianime.controller');
 
 // ── Home ──────────────────────────────────────────────────────────
@@ -16,15 +23,19 @@ router.get('/home', getHomePage);
 
 // ── Search ────────────────────────────────────────────────────────
 router.get('/search', getSearch);
+router.get('/search/suggestion', getSearchSuggestions);
 
 // ── Anime Info ────────────────────────────────────────────────────
 router.get('/anime/:animeId', getAnimeInfo);
+router.get('/qtip/:animeId', getQtipInfo);
+router.get('/anime/about/:animeId', getAboutInfo);
 
 // ── Episodes ──────────────────────────────────────────────────────
 router.get('/anime/:animeId/episodes', getAnimeEpisodes);
+router.get('/anime/:animeId/next-episode-schedule', getNextEpisodeSchedule);
 
 // ── Episode Servers ───────────────────────────────────────────────
-// ?animeEpisodeId=summer-time-rendering-5hwlkp?ep=1e3nmx
+// ?animeEpisodeId=summer-time-rendering-5hwlkp?ep=1
 router.get('/episode/servers', getEpisodeServers);
 
 // ── Episode Sources (Stream Links) ────────────────────────────────
@@ -32,10 +43,18 @@ router.get('/episode/servers', getEpisodeServers);
 router.get('/episode/sources', getEpisodeSources);
 
 // ── Category ──────────────────────────────────────────────────────
-// categories: top-airing, top-upcoming, completed, recently-added
 router.get('/category/:name', getCategory);
 
 // ── Genre ─────────────────────────────────────────────────────────
 router.get('/genre/:name', getGenreAnimes);
+
+// ── Producer ──────────────────────────────────────────────────────
+router.get('/producer/:name', getProducerAnimes);
+
+// ── Schedule ──────────────────────────────────────────────────────
+router.get('/schedule', getSchedule);
+
+// ── AZ List ───────────────────────────────────────────────────────
+router.get('/azlist/:sortOption', getAZList);
 
 module.exports = router;

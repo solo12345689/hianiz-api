@@ -210,7 +210,7 @@ console.log(data);
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/qtip/one-piece-100");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/qtip/one-piece-gahocg");
 ```
 
 [🔼 Back to Top](#table-of-contents)
@@ -234,7 +234,7 @@ const resp = await fetch("http://localhost:4000/api/v2/hianime/qtip/one-piece-10
 #### Request Sample
 
 ```javascript
-const resp = await fetch("http://localhost:4000/api/v2/hianime/anime/about/one-piece-100");
+const resp = await fetch("http://localhost:4000/api/v2/hianime/anime/about/one-piece-gahocg");
 ```
 
 [🔼 Back to Top](#table-of-contents)

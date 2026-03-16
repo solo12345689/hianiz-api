@@ -577,8 +577,8 @@ const getAZList = async (req, res) => {
 // ------------------------------------------------------------------
 const getQtipInfo = async (req, res) => {
     try {
-        const { id } = req.params;
-        const response = await axiosInstance.get(`/anime/${id}`);
+        const { animeId } = req.params;
+        const response = await axiosInstance.get(`/anime/${animeId}`);
         const doc = response.data.anime;
         const info = parseAnimeInfo(doc);
 
@@ -615,8 +615,8 @@ const getAboutInfo = async (req, res) => {
 // ------------------------------------------------------------------
 const getNextEpisodeSchedule = async (req, res) => {
     try {
-        const { id } = req.params;
-        const response = await axiosInstance.get(`/anime/${id}`);
+        const { animeId } = req.params;
+        const response = await axiosInstance.get(`/anime/${animeId}`);
         const doc = response.data.anime;
 
         res.status(200).json({
